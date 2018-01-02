@@ -1,3 +1,9 @@
+## Specific to the project
+Data/*
+TutoTF/*
+
+
+## For python
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
