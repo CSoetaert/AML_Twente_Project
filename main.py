@@ -32,24 +32,24 @@ def main():
 	labels_sub1_ser9 = dt.get_class_from_data(events_sub1_ser9)
 	test_input_fn = tf.estimator.inputs.numpy_input_fn(
 		x={"x": data_sub1_ser9},
-	    y=labels_sub1_ser9,
-	    num_epochs=1,
-	    shuffle=False)
+		y=labels_sub1_ser9,
+		num_epochs=1,
+		shuffle=False)
 
 	evaluation = classifier.evaluate(input_fn=test_input_fn)
-	print evaluation
+	print(evaluation)
 
 	predict_input_fn = tf.estimator.inputs.numpy_input_fn(
-	    x={"x": data_sub1_ser9},
-	    num_epochs=1,
-	    shuffle=False)
+		x={"x": data_sub1_ser9},
+		num_epochs=1,
+		shuffle=False)
 
 	predictions = classifier.predict(input_fn=predict_input_fn)
 	predicted_classes = [int(p["classes"][0]) for p in predictions]
- 	#print predicted_classes
- 	confusion_matrix = tf.contrib.metrics.confusion_matrix(labels_sub1_ser9,predicted_classes,num_classes=7)
- 	session.run(confusion_matrix)
- 	print confusion_matrix.eval()
+	#print(predicted_classes)
+	confusion_matrix = tf.contrib.metrics.confusion_matrix(labels_sub1_ser9,predicted_classes,num_classes=7)
+	session.run(confusion_matrix)
+	print(confusion_matrix.eval())
 
 if __name__ == "__main__":
-    main()
+	main()
