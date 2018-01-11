@@ -1,5 +1,6 @@
 import csv
 import numpy as np
+import timeit
 
 LIST_TRAINING_FILE_DATA = []
 LIST_TRAINING_FILE_EVENTS = []
@@ -8,8 +9,12 @@ LIST_TEST_FILE_DATA = []
 for i in range(1,13):
 	LIST_TRAINING_FILE_DATA = LIST_TRAINING_FILE_DATA + ["Data/train/subj"+ \
 	str(i)+"_series"+str(j)+"_data.csv" for j in range(1,2)]
+	LIST_VALIDATION_FILE_DATA = LIST_TRAINING_FILE_DATA + ["Data/train/subj"+ \
+	str(i)+"_series"+str(j)+"_data.csv" for j in range(2,3)]
 	LIST_TRAINING_FILE_EVENTS = LIST_TRAINING_FILE_EVENTS + ["Data/train/subj" \
-	+str(i)+"_series"+str(j)+"_events.csv" for j in range(1,9)]
+	+str(i)+"_series"+str(j)+"_events.csv" for j in range(1,2)]
+	LIST_VALIDATION_FILE_EVENTS = LIST_TRAINING_FILE_EVENTS + ["Data/train/subj" \
+	+str(i)+"_series"+str(j)+"_events.csv" for j in range(2,3)]
 	LIST_TEST_FILE_DATA = LIST_TEST_FILE_DATA + ["Data/test/subj"+str(i)+ \
 	"_series"+str(j)+"_data.csv" for j in range(9,11)]
 
@@ -54,30 +59,34 @@ def get_class_from_data(array_row):
 				labels[i] = int(j)
 	return labels
 
-def get_training_set_data(list_name_file_data = LIST_TRAINING_FILE_DATA):
+def save_data(list_name_file_data,filename):
+	"""function to save the datasets in a numpy file
+	
+	Args:
+	    list_name_file_data (list): list of the filename from which we 
+	    extract the data
+	    filename (string): the name of the file in which we save the data
+	"""
 	list_data = []
 	for i in range(len(list_name_file_data)):
-		print(i)
 		list_data = list_data + read_csv_get_values(list_name_file_data[i])
 	array_data = np.array(list_data)
-	return array_data
+	np.save(filename,array_data)
 
-def get_training_set_labels(list_name_file_events = LIST_TRAINING_FILE_EVENTS):
+def save_labels(list_name_file_events,filename):
+	"""function to save the labels in a numpy file
+	
+	Args:
+	    list_name_file_events (list): list of the filename from which we 
+	    extract the labels
+	    filename (string): the name of the file in which we save the labels
+	"""
 	list_events = []
-	for i in range(len(list_name_file_data)):
-		list_data = list_data + read_csv_get_values(list_name_file_events[i])
-	array_data = np.array(list_data)
-	class_array = get_class_from_data(array_data)
-	return class_array
-
-def get_test_set_data(list_name_file_data = LIST_TEST_FILE_DATA):
-	list_data = []
-	for i in range(len(list_name_file_data)):
-		list_data = list_data + read_csv_get_values(list_name_file_data[i])
-	array_data = np.array(list_data)
-	return array_data
-
-
+	for i in range(len(list_name_file_events)):
+		list_events = list_events + read_csv_get_values(list_name_file_events[i])
+	array_events = np.array(list_events)
+	class_array = get_class_from_data(array_events)
+	np.save(filename,class_array)
 
 
 if __name__ == "__main__":
@@ -86,9 +95,12 @@ if __name__ == "__main__":
 	# print(LIST_TRAINING_FILE_DATA)
 	# data_sub1_ser1 = read_csv_get_values("Data/train/subj1_series1_data.csv")
 	# print(data_sub1_ser1[0])
-
 	# events_sub1_ser1 = read_csv_get_values("Data/train/subj1_series1_events.csv")
 	# print(events_sub1_ser1[0])
-	training_set = get_training_set_data()
-	print(len(training_set))
+	#np.load("Data/trainingset.npy")
+	#get_training_set_data(LIST_TRAINING_FILE_DATA)
+	save_data(LIST_TRAINING_FILE_DATA,"Data/training_set_data")
+	save_data(LIST_VALIDATION_FILE_DATA,"Data/validation_set_data")
+	save_labels(LIST_TRAINING_FILE_EVENTS,"Data/training_set_labels")
+	save_labels(LIST_VALIDATION_FILE_EVENTS,"Data/validation_set_labels")
 
