@@ -26,11 +26,11 @@ def read_csv_get_values(file_name) :
 	time-step.
 	
 	Args:
-	    file_name (TYPE): relative path to the csv file
+		file_name (TYPE): relative path to the csv file
 	
 	Returns:
-	    list: list of the list containing the classes at 
-	    each time step.
+		list: list of the list containing the classes at
+		each time step.
 	"""
 	with open(file_name, 'rt') as csvfile:
 		csv_content = csv.reader(csvfile)
@@ -46,10 +46,10 @@ def get_class_from_data(array_row):
 	"""Function to get the class from the events file from the data set. 
 	
 	Args:
-	    array_row (numpy array): array of the events for each class
+		array_row (numpy array): array of the events for each class
 	
 	Returns:
-	    numpy array: array containing the class identifier for each time step
+		numpy array: array containing the class identifier for each time step
 	"""
 	labels = np.zeros(array_row.shape[0],dtype = int)
 	for i in range(array_row.shape[0]):
@@ -63,9 +63,9 @@ def save_data(list_name_file_data,filename):
 	"""function to save the datasets in a numpy file
 	
 	Args:
-	    list_name_file_data (list): list of the filename from which we 
-	    extract the data
-	    filename (string): the name of the file in which we save the data
+		list_name_file_data (list): list of the filename from which we
+		extract the data
+		filename (string): the name of the file in which we save the data
 	"""
 	list_data = []
 	for i in range(len(list_name_file_data)):
@@ -77,9 +77,9 @@ def save_labels(list_name_file_events,filename):
 	"""function to save the labels in a numpy file
 	
 	Args:
-	    list_name_file_events (list): list of the filename from which we 
-	    extract the labels
-	    filename (string): the name of the file in which we save the labels
+		list_name_file_events (list): list of the filename from which we
+		extract the labels
+		filename (string): the name of the file in which we save the labels
 	"""
 	list_events = []
 	for i in range(len(list_name_file_events)):

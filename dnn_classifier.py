@@ -2,7 +2,8 @@ import tensorflow as tf
 import data_extraction as dt
 import numpy as np
 
-def dnn_classifier(training_set_data,training_set_labels,validation_set_data,validation_set_labels,nb_input,nb_classes,hidden_units,steps):
+
+def dnn_classifier(training_set_data, training_set_labels, validation_set_data, validation_set_labels, nb_input, nb_classes, hidden_units, steps):
 	"""fuction containing the structure, training and testing of the dnn classifier
 	
 	Args:
