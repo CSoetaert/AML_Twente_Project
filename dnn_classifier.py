@@ -2,7 +2,7 @@ import tensorflow as tf
 import data_extraction as dt
 import numpy as np
 
-def dnn_classifier(training_set_data,training_set_labels,validation_set_data,validation_set_labels,nb_input,nb_classes,hidden_units,steps):
+def dnn_regressor(training_set_data,training_set_labels,validation_set_data,validation_set_labels,nb_input,output_dimension,hidden_units,steps):
 	"""fuction containing the structure, training and testing of the dnn classifier
 	
 	Args:
@@ -20,10 +20,10 @@ def dnn_classifier(training_set_data,training_set_labels,validation_set_data,val
 	"""
 	session = tf.InteractiveSession()
 	features = [tf.feature_column.numeric_column("x",shape=[nb_input])]
-	classifier = tf.estimator.DNNClassifier(
+	classifier = tf.estimator.DNNRegressor(
 		feature_columns = features,
 		hidden_units = hidden_units,
-		n_classes = nb_classes,
+		label_dimension = output_dimension,
 		model_dir = "Model")
 
 	train_input_fn = tf.estimator.inputs.numpy_input_fn(
@@ -54,3 +54,4 @@ def dnn_classifier(training_set_data,training_set_labels,validation_set_data,val
 	session.run(confusion_matrix)
 	print(confusion_matrix.eval())
 	return evaluation, confusion_matrix
+	
