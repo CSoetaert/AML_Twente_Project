@@ -81,12 +81,16 @@ def save_labels(list_name_file_events,filename):
 	class_array = get_class_from_data(array_events)
 	np.save(filename,class_array)
 
+def get_data_matrix(filename):
+	return pd.read_csv(filename).as_matrix()[:,1:].astype(float)
+
+
 
 if __name__ == "__main__":
 	#save_data(LIST_TRAINING_FILE_DATA,"Data/training_set_data")
 	#save_data(LIST_VALIDATION_FILE_DATA,"Data/validation_set_data")
 	#save_labels(LIST_TRAINING_FILE_EVENTS,"Data/training_set_labels")
 	#save_labels(LIST_VALIDATION_FILE_EVENTS,"Data/validation_set_labels")
-	data = save_data(LIST_TRAINING_FILE_DATA)
+	data = get_data_matrix(LIST_TRAINING_FILE_DATA[0])
 	print(data)
 
