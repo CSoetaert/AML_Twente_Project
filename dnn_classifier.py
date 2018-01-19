@@ -36,9 +36,9 @@ def dnn_classifier(training_set_data, training_set_labels, validation_set_data, 
 		label_dimension = nb_output,
 		model_dir = "Model")
 
-	training_set_data = training_set_data.reshape((training_set_data.shape[0]//nb_input),nb_input)
-	training_set_labels = training_set_labels.reshape((training_set_labels.shape[0]//nb_output),nb_output)
-
+	if training_set_data.shape[1] == 1:
+		training_set_data = training_set_data.reshape((training_set_data.shape[0]//nb_input),nb_input)
+		training_set_labels = training_set_labels.reshape((training_set_labels.shape[0]//nb_output),nb_output)
 
 	train_input_fn = tf.estimator.inputs.numpy_input_fn(
 		x={"x":training_set_data},
@@ -47,8 +47,9 @@ def dnn_classifier(training_set_data, training_set_labels, validation_set_data, 
 		shuffle=True)
 	classifier.train(input_fn=train_input_fn,steps=steps)
 
-	validation_set_data = validation_set_data.reshape((validation_set_data.shape[0]//nb_input),nb_input)
-	validation_set_labels = validation_set_labels.reshape((validation_set_labels.shape[0]//nb_output),nb_output)
+	if validation_set_data.shape[1] == 1:
+		validation_set_data = validation_set_data.reshape((validation_set_data.shape[0]//nb_input),nb_input)
+		validation_set_labels = validation_set_labels.reshape((validation_set_labels.shape[0]//nb_output),nb_output)
 
 	test_input_fn = tf.estimator.inputs.numpy_input_fn(
 		x= {"x":validation_set_data},
