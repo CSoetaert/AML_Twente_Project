@@ -6,10 +6,6 @@ LIST_TRAINING_FILE_DATA = []
 LIST_TRAINING_FILE_EVENTS = []
 LIST_TEST_FILE_DATA = []
 
-<<<<<<< HEAD
-=======
-#for i in range(1,13):
->>>>>>> 2b64748d826cffe168a1a7accdecddd828351dba
 for i in range(1,2):
 	LIST_TRAINING_FILE_DATA = LIST_TRAINING_FILE_DATA + ["Data/train/subj"+ \
 	str(i)+"_series"+str(j)+"_data.csv" for j in range(1,7)]
