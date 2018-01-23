@@ -16,9 +16,11 @@ def main():
 	v_set_d = v_set_d.reshape((v_set_d.shape[0]//nb_input),nb_input)
 	v_set_l = v_set_l.reshape((v_set_l.shape[0]//nb_output),nb_output)
 
+	t_set_d = t_set_d[:,12]
+	v_set_d = v_set_d[:,12]
 
 	l_h_u = [40,20,30,40,30,20,30,20,35,25,40]
-	dnn.dnn_classifier(t_set_d,t_set_l,v_set_d,v_set_l,nb_input,nb_output,l_h_u,500000)
+	dnn.dnn_classifier(t_set_d,t_set_l,v_set_d,v_set_l,1,nb_output,l_h_u,500000,"OnlyC3")
 	
 
 if __name__ == "__main__":

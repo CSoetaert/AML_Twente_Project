@@ -6,7 +6,7 @@ LIST_TRAINING_FILE_DATA = []
 LIST_TRAINING_FILE_EVENTS = []
 LIST_TEST_FILE_DATA = []
 
-for i in range(1,13):
+for i in range(1,2):
 	LIST_TRAINING_FILE_DATA = LIST_TRAINING_FILE_DATA + ["Data/train/subj"+ \
 	str(i)+"_series"+str(j)+"_data.csv" for j in range(1,7)]
 	LIST_VALIDATION_FILE_DATA = LIST_TRAINING_FILE_DATA + ["Data/train/subj"+ \
@@ -83,6 +83,13 @@ def save_labels(list_name_file_events,filename):
 
 def get_data_matrix(filename):
 	return pd.read_csv(filename).as_matrix()[:,1:].astype(float)
+
+def get_data_from_file_list(filelist):
+	data = get_data_matrix(filelist[0])
+	for i in range(1,len(filelist)):
+		data = np.append(data, get_data_matrix(filelist[i]))
+	return data
+
 
 
 
