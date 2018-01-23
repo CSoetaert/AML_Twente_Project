@@ -47,7 +47,15 @@ def dnn_classifier(training_set_data, training_set_labels, validation_set_data, 
 		feature_columns = features,
 		hidden_units = hidden_units,
 		label_dimension = nb_output,
+<<<<<<< HEAD
 		model_dir = model_dir)
+=======
+		model_dir = "Model")
+
+	if training_set_data.shape[1] == 1:
+		training_set_data = training_set_data.reshape((training_set_data.shape[0]//nb_input),nb_input)
+		training_set_labels = training_set_labels.reshape((training_set_labels.shape[0]//nb_output),nb_output)
+>>>>>>> 2b64748d826cffe168a1a7accdecddd828351dba
 
 	train_input_fn = tf.estimator.inputs.numpy_input_fn(
 		x={"x":training_set_data},
@@ -56,6 +64,12 @@ def dnn_classifier(training_set_data, training_set_labels, validation_set_data, 
 		shuffle=True)
 	classifier.train(input_fn=train_input_fn,steps=steps)
 
+<<<<<<< HEAD
+=======
+	if validation_set_data.shape[1] == 1:
+		validation_set_data = validation_set_data.reshape((validation_set_data.shape[0]//nb_input),nb_input)
+		validation_set_labels = validation_set_labels.reshape((validation_set_labels.shape[0]//nb_output),nb_output)
+>>>>>>> 2b64748d826cffe168a1a7accdecddd828351dba
 
 	test_input_fn = tf.estimator.inputs.numpy_input_fn(
 		x= {"x":validation_set_data},

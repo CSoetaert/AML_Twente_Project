@@ -6,6 +6,10 @@ LIST_TRAINING_FILE_DATA = []
 LIST_TRAINING_FILE_EVENTS = []
 LIST_TEST_FILE_DATA = []
 
+<<<<<<< HEAD
+=======
+#for i in range(1,13):
+>>>>>>> 2b64748d826cffe168a1a7accdecddd828351dba
 for i in range(1,2):
 	LIST_TRAINING_FILE_DATA = LIST_TRAINING_FILE_DATA + ["Data/train/subj"+ \
 	str(i)+"_series"+str(j)+"_data.csv" for j in range(1,7)]
@@ -99,5 +103,6 @@ if __name__ == "__main__":
 	#save_labels(LIST_TRAINING_FILE_EVENTS,"Data/training_set_labels")
 	#save_labels(LIST_VALIDATION_FILE_EVENTS,"Data/validation_set_labels")
 	data = get_data_matrix(LIST_TRAINING_FILE_DATA[0])
+	print(np.shape(data))
 	print(data)
 
